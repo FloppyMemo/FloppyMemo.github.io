@@ -1,6 +1,5 @@
 # FloppyMemo.github.io
-
-<!DOCTYPE html>
+theme: minimal
 <html lang="en">
 <head>
     <meta charset="UTF-8">
