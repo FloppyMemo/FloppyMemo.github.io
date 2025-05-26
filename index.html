@@ -6,21 +6,37 @@
   <title>FloppyMemo Portfolio</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f0f2f5;
       color: #333;
       text-align: center;
-      padding: 60px;
+    }
+    header {
+      background: #2c3e50;
+      color: white;
+      padding: 60px 20px 40px;
+    }
+    header img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 4px solid white;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     }
     h1 {
-      color: #2c3e50;
+      margin-top: 20px;
+      font-size: 2.5em;
+      animation: fadeIn 2s ease;
     }
-    a {
-      color: #3498db;
-      text-decoration: none;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-    a:hover {
-      text-decoration: underline;
+    section {
+      padding: 40px 20px;
+      max-width: 800px;
+      margin: auto;
     }
     ul {
       list-style: none;
@@ -29,20 +45,55 @@
     li {
       margin: 10px 0;
     }
+    a {
+      color: #3498db;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    footer {
+      background: #2c3e50;
+      color: white;
+      padding: 20px;
+      font-size: 0.9em;
+    }
   </style>
 </head>
 <body>
-  <h1>Hello, I'm FloppyMemo 👋</h1>
-  <p>Welcome to my personal portfolio page hosted on GitHub Pages.</p>
 
+<header>
+  <img src="assets/img/avatar.jpg" alt="Avatar">
+  <h1>Hello, I'm FloppyMemo 👋</h1>
+  <p>Developer • Creator • Tinkerer</p>
+</header>
+
+<section>
   <h2>🚀 Projects</h2>
   <ul>
-    <li><a href="https://github.com/FloppyMemo/project1" target="_blank">Project One</a></li>
-    <li><a href="https://github.com/FloppyMemo/project2" target="_blank">Project Two</a></li>
+    <li><a href="https://github.com/FloppyMemo/project1" target="_blank">Project One – Description</a></li>
+    <li><a href="https://github.com/FloppyMemo/project2" target="_blank">Project Two – Description</a></li>
   </ul>
+</section>
 
+<section>
+  <h2>👨‍💻 About Me</h2>
+  <p>
+    I’m passionate about building clean, functional tools using code and creativity.  
+    This site is a space where I showcase what I’ve built and learned.
+  </p>
+</section>
+
+<section>
   <h2>📫 Contact</h2>
   <p>Email: your.email@example.com</p>
   <p>GitHub: <a href="https://github.com/FloppyMemo" target="_blank">FloppyMemo</a></p>
+</section>
+
+<footer>
+  &copy; 2025 FloppyMemo. All rights reserved.
+</footer>
+
 </body>
 </html>
