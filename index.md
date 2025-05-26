@@ -6,7 +6,7 @@ title: Welcome to FloppyMemo
 # 👋 Hello, I'm FloppyMemo
 
 Welcome to my personal site where I share my projects, notes, and ideas.  
-This page is built using [GitHub Pages](https://pages.github.com/) with the **minimal** Jekyll theme.
+
 
 ---
 
