@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caio Rocha, Cybersecurity</title>
+<meta name="description" content="Caio Rocha's professional portfolio: cybersecurity, IT support, and security operations experience, education, and hands-on practice.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-void: #0A0D10;
+    --bg-panel: #12161B;
+    --bg-panel-raised: #171C22;
+    --line: #262C33;
+    --ink: #E7E4DC;
+    --ink-dim: #93999E;
+    --ink-faint: #565D64;
+    --amber: #F2A73B;
+    --amber-dim: rgba(242,167,59,0.14);
+    --teal: #33C9B0;
+    --teal-dim: rgba(51,201,176,0.14);
+    --red: #E5484D;
+    --font-mono: 'JetBrains Mono', monospace;
+    --font-body: 'Public Sans', sans-serif;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{
+    background:var(--bg-void);
+    color:var(--ink);
+    font-family:var(--font-body);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  ::selection{ background:var(--amber); color:var(--bg-void); }
+  a{ color:inherit; text-decoration:none; }
+
+  .wrap{ max-width:920px; margin:0 auto; padding:0 28px; }
+
+  .grid-bg{
+    position:fixed; inset:0; z-index:-1;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 64px 64px;
+    opacity:0.25;
+    mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, black 40%, transparent 90%);
+  }
+
+  .topbar{
+    position:sticky; top:0; z-index:50;
+    background:rgba(10,13,16,0.85);
+    backdrop-filter: blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar-inner{
+    max-width:920px; margin:0 auto; padding:16px 28px;
+    display:flex; align-items:center; justify-content:space-between; gap:16px;
+  }
+  .case-id{ font-family:var(--font-mono); font-weight:700; font-size:14px; letter-spacing:0.5px; color:var(--ink); white-space:nowrap; }
+  .case-id span{ color:var(--amber); }
+  .topbar-right{ display:flex; align-items:center; gap:20px; }
+  .topnav{ display:flex; gap:20px; flex-wrap:wrap; }
+  .topnav a{
+    font-family:var(--font-mono); font-size:11.5px; letter-spacing:0.5px; color:var(--ink-dim);
+    text-transform:uppercase; transition:color .2s ease; white-space:nowrap;
+  }
+  .topnav a:hover{ color:var(--amber); }
+  @media (max-width:760px){ .topnav{ display:none; } }
+
+  .lang-toggle{
+    display:flex; border:1px solid var(--line); border-radius:20px; overflow:hidden;
+    font-family:var(--font-mono); font-size:11px; font-weight:700; letter-spacing:0.5px;
+  }
+  .lang-toggle button{
+    background:transparent; border:none; color:var(--ink-dim); padding:6px 12px; cursor:pointer;
+    transition:all .2s ease; font-family:var(--font-mono); font-weight:700; letter-spacing:0.5px;
+  }
+  .lang-toggle button.active{ background:var(--amber); color:var(--bg-void); }
+  .lang-toggle button:not(.active):hover{ color:var(--amber); }
+
+  .hero{ padding:96px 0 72px; position:relative; }
+  .stamp{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:var(--font-mono); font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase;
+    color:var(--amber); border:1px solid var(--amber); padding:5px 10px; border-radius:3px;
+    background:var(--amber-dim); transform:rotate(-2deg); margin-bottom:28px;
+  }
+  .stamp::before{ content:''; width:6px; height:6px; background:var(--amber); border-radius:50%; display:inline-block; }
+  .hero h1{
+    font-family:var(--font-mono); font-weight:800; font-size:clamp(38px, 7vw, 68px);
+    line-height:1.02; letter-spacing:-1px; margin-bottom:18px;
+  }
+  .hero h1 .accent{ color:var(--amber); }
+  .hero .role{ font-family:var(--font-mono); font-size:16px; color:var(--teal); letter-spacing:0.4px; margin-bottom:24px; }
+  .hero .role::before{ content:'> '; color:var(--ink-faint); }
+  .hero p.lede{ max-width:600px; color:var(--ink-dim); font-size:17px; margin-bottom:36px; }
+  .hero-actions{ display:flex; gap:14px; flex-wrap:wrap; }
+  .btn{
+    font-family:var(--font-mono); font-size:13px; font-weight:600; letter-spacing:0.3px;
+    padding:12px 20px; border-radius:4px; border:1px solid var(--line); transition:all .2s ease;
+    display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn-primary{ background:var(--amber); color:var(--bg-void); border-color:var(--amber); }
+  .btn-primary:hover{ background:transparent; color:var(--amber); }
+  .btn-ghost{ color:var(--ink); }
+  .btn-ghost:hover{ border-color:var(--ink-dim); background:var(--bg-panel); }
+
+  section{ padding:64px 0; border-top:1px solid var(--line); }
+  .section-head{ display:flex; align-items:baseline; gap:14px; margin-bottom:36px; }
+  .section-num{ font-family:var(--font-mono); font-size:13px; color:var(--ink-faint); }
+  .section-head h2{ font-family:var(--font-mono); font-size:22px; letter-spacing:0.3px; text-transform:uppercase; }
+  .section-rule{ flex:1; height:1px; background:var(--line); }
+
+  .about-grid{ display:grid; grid-template-columns:1.3fr 1fr; gap:40px; }
+  @media (max-width:680px){ .about-grid{ grid-template-columns:1fr; } }
+  .about-text p{ color:var(--ink-dim); margin-bottom:16px; font-size:15.5px; }
+  .about-text p:last-child{ margin-bottom:0; }
+  .field-list{ background:var(--bg-panel); border:1px solid var(--line); border-radius:6px; padding:20px; }
+  .field-row{
+    display:flex; justify-content:space-between; padding:9px 0; border-bottom:1px dashed var(--line);
+    font-family:var(--font-mono); font-size:13px; gap:12px;
+  }
+  .field-row:last-child{ border-bottom:none; }
+  .field-row .k{ color:var(--ink-faint); white-space:nowrap; }
+  .field-row .v{ color:var(--ink); text-align:right; }
+  .field-row .v.ok{ color:var(--teal); }
+
+  .cert-grid{ display:grid; grid-template-columns:repeat(2, 1fr); gap:18px; }
+  @media (max-width:680px){ .cert-grid{ grid-template-columns:1fr; } }
+  .cert-card{
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:8px; padding:22px;
+    position:relative; overflow:hidden; transition:transform .25s ease, border-color .25s ease;
+  }
+  .cert-card:hover{ transform:translateY(-3px); border-color:var(--teal); }
+  .cert-card .badge{
+    width:44px; height:44px; border-radius:8px; background:var(--teal-dim); border:1px solid var(--teal);
+    display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-weight:700;
+    color:var(--teal); margin-bottom:14px; font-size:14px;
+  }
+  .cert-card h3{ font-size:16px; margin-bottom:6px; }
+  .cert-card p{ color:var(--ink-dim); font-size:13.5px; }
+  .cert-card ul{ color:var(--ink-dim); font-size:13.5px; padding-left:18px; margin-top:6px; }
+  .cert-card li{ margin-bottom:3px; }
+  .cert-verify-link{
+    font-family:var(--font-mono);
+    font-size:10.5px;
+    color:var(--teal);
+    border:1px solid var(--teal);
+    border-radius:3px;
+    padding:1px 6px;
+    margin-left:6px;
+    white-space:nowrap;
+    transition:all .2s ease;
+  }
+  .cert-verify-link:hover{ background:var(--teal-dim); }
+  .cert-card .verified{
+    position:absolute; top:18px; right:18px; font-family:var(--font-mono); font-size:10px;
+    letter-spacing:0.8px; color:var(--teal); text-transform:uppercase;
+  }
+
+  .skill-cats{ display:grid; gap:22px; }
+  .skill-cat-label{
+    font-family:var(--font-mono); font-size:11px; letter-spacing:1px; text-transform:uppercase;
+    color:var(--ink-faint); margin-bottom:10px;
+  }
+  .chips{ display:flex; flex-wrap:wrap; gap:8px; }
+  .chip{
+    font-family:var(--font-mono); font-size:12.5px; padding:6px 12px; border:1px solid var(--line);
+    border-radius:20px; color:var(--ink-dim); background:var(--bg-panel); transition:all .2s ease;
+  }
+  .chip:hover{ border-color:var(--amber); color:var(--amber); }
+
+  .case-files{ display:grid; gap:20px; }
+  .case-file{
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:8px; padding:26px;
+    position:relative; transition:border-color .25s ease, transform .25s ease;
+  }
+  .case-file:hover{ border-color:var(--amber); transform:translateX(3px); }
+  .case-file-head{
+    display:flex; justify-content:space-between; align-items:flex-start; gap:16px;
+    margin-bottom:14px; flex-wrap:wrap;
+  }
+  .case-file-head h3{ font-size:18px; }
+  .case-status{
+    font-family:var(--font-mono); font-size:10.5px; letter-spacing:0.8px; text-transform:uppercase;
+    padding:4px 9px; border-radius:3px; white-space:nowrap;
+  }
+  .case-status.resolved{ background:var(--teal-dim); color:var(--teal); border:1px solid var(--teal); }
+  .case-status.progress{ background:var(--amber-dim); color:var(--amber); border:1px solid var(--amber); }
+  .case-status.period{ background:transparent; color:var(--ink-dim); border:1px solid var(--ink-faint); }
+  .case-file p.desc{ color:var(--ink-dim); font-size:14.5px; margin-bottom:16px; }
+  .case-file ul.case-bullets{ color:var(--ink-dim); font-size:14px; margin:0 0 14px 0; padding-left:20px; }
+  .case-file ul.case-bullets li{ margin-bottom:6px; }
+  .achievement{
+    border-left:2px solid var(--amber); padding-left:12px; margin-bottom:14px;
+    font-size:13.5px; color:var(--ink-dim);
+  }
+  .achievement .lbl{ color:var(--amber); font-family:var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:0.6px; display:block; margin-bottom:3px; }
+  .case-meta{ display:grid; grid-template-columns:repeat(3, 1fr); gap:10px; margin-bottom:16px; }
+  @media (max-width:600px){ .case-meta{ grid-template-columns:1fr 1fr; } }
+  .case-meta div{ font-family:var(--font-mono); font-size:12px; }
+  .case-meta .k{ color:var(--ink-faint); display:block; margin-bottom:2px; text-transform:uppercase; letter-spacing:0.5px; font-size:10px; }
+  .case-meta .v{ color:var(--ink); }
+  .case-link{ font-family:var(--font-mono); font-size:12.5px; color:var(--amber); display:inline-flex; align-items:center; gap:6px; }
+  .case-link:hover{ text-decoration:underline; }
+  .case-sub{ font-family:var(--font-mono); font-size:12px; color:var(--ink-faint); margin-top:-10px; margin-bottom:14px; display:block; }
+
+  footer{ padding:64px 0 48px; border-top:1px solid var(--line); }
+  .footer-grid{ display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:24px; }
+  footer h2{ font-family:var(--font-mono); font-size:26px; margin-bottom:10px; }
+  footer p{ color:var(--ink-dim); font-size:14.5px; max-width:420px; }
+  .contact-links{ display:flex; gap:12px; flex-wrap:wrap; }
+  .eof{ text-align:center; font-family:var(--font-mono); font-size:11px; color:var(--ink-faint); margin-top:56px; letter-spacing:1px; }
+
+  .reveal{ opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+  @media (prefers-reduced-motion: reduce){ .reveal{ opacity:1; transform:none; transition:none; } html{ scroll-behavior:auto; } }
+  :focus-visible{ outline:2px solid var(--amber); outline-offset:3px; }
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="case-id">CR<span>-01</span> // <span data-i18n="dossier_label">SEC-OPS</span></div>
+    <div class="topbar-right">
+      <nav class="topnav">
+        <a href="#about" data-i18n="nav_about">About</a>
+        <a href="#experience" data-i18n="nav_experience">Experience</a>
+        <a href="#education" data-i18n="nav_education">Education</a>
+        <a href="#certifications" data-i18n="nav_certs">Certifications</a>
+        <a href="#skills" data-i18n="nav_skills">Skills</a>
+        <a href="#labs" data-i18n="nav_labs">Labs</a>
+        <a href="#contact" data-i18n="nav_contact">Contact</a>
+      </nav>
+      <div class="lang-toggle">
+        <button type="button" data-lang="en" class="active">EN</button>
+        <button type="button" data-lang="pt">PT</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="stamp" data-i18n="stamp">TLP:CLEAR</div>
+    <h1>Caio <span class="accent">Rocha</span></h1>
+    <div class="role" data-i18n="role">cybersecurity / security operations &amp; compliance</div>
+    <p class="lede" data-i18n="lede">
+      Security-focused technology professional with a foundation in IT support, now working
+      across risk-based investigations, SIEM monitoring, and access control (MFA, RBAC).
+      This site brings together my professional experience, education, and continued
+      hands-on practice.
+    </p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#experience" data-i18n="btn_view_experience">View experience</a>
+      <a class="btn btn-ghost" href="#contact" data-i18n="btn_contact">Contact</a>
+    </div>
+  </header>
+
+  <!-- ABOUT -->
+  <section id="about" class="reveal">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <h2 data-i18n="about_title">About</h2>
+      <span class="section-rule"></span>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p data-i18n="about_p1">
+          I'm a results-driven cybersecurity professional fluent in Portuguese and English, with
+          hands-on security and IT experience across Brazil and Ireland. I hold a Bachelor's Degree
+          in Computing &amp; IT from CCT College Dublin and a Higher Diploma in Cybersecurity,
+          Risk &amp; Compliance from Atlantic Technological University.
+        </p>
+        <p data-i18n="about_p2">
+          My path runs from IT support into security operations: implementing controls like MFA and
+          RBAC, running vulnerability assessments, and investigating incidents through SIEM. I'm
+          currently a Trust &amp; Safety Analyst at Accenture, performing risk-based investigations,
+          and I keep offensive and defensive skills sharp through hands-on labs.
+        </p>
+      </div>
+      <div class="field-list">
+        <div class="field-row"><span class="k" data-i18n="field_area">Area</span><span class="v" data-i18n="field_area_val">Cybersecurity</span></div>
+        <div class="field-row"><span class="k" data-i18n="field_focus">Focus</span><span class="v" data-i18n="field_focus_val">Security Operations &amp; Compliance</span></div>
+        <div class="field-row"><span class="k" data-i18n="field_languages">Languages</span><span class="v">PT / EN</span></div>
+        <div class="field-row"><span class="k" data-i18n="field_base">Experience</span><span class="v ok" data-i18n="field_base_val">5+ years IT/Sec</span></div>
+        <div class="field-row"><span class="k" data-i18n="field_location">Location</span><span class="v" data-i18n="field_location_val">Ireland</span></div>
+        <div class="field-row"><span class="k" data-i18n="field_status">Status</span><span class="v ok" data-i18n="field_status_val">Open to opportunities</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" class="reveal">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <h2 data-i18n="experience_title">Experience</h2>
+      <span class="section-rule"></span>
+    </div>
+    <div class="case-files">
+
+      <div class="case-file">
+        <div class="case-file-head">
+          <h3 data-i18n="exp1_title">Trust &amp; Safety Analyst, Accenture</h3>
+          <span class="case-status period" data-i18n="exp1_dates">Feb 2026 – Present</span>
+        </div>
+        <ul class="case-bullets">
+          <li data-i18n="exp1_b1">Perform risk-based investigations and policy enforcement for a global technology client, ensuring compliance with client policies, operational procedures, and applicable security requirements.</li>
+          <li data-i18n="exp1_b2">Analyse complex cases, assess policy, integrity, and platform risks, and make accurate policy-driven decisions in a fast-paced, high-volume environment.</li>
+          <li data-i18n="exp1_b3">Identify and escalate sensitive or high-risk cases to appropriate stakeholders while maintaining confidentiality and adherence to governance and escalation procedures.</li>
+          <li data-i18n="exp1_b4">Collaborate with Quality Assurance, Training, Subject Matter Experts (SMEs), and cross-functional teams through policy calibrations, quality reviews, and continuous improvement initiatives.</li>
+          <li data-i18n="exp1_b5">Operate within strict data protection, confidentiality, and information security requirements while consistently maintaining high standards of quality and operational accuracy.</li>
+        </ul>
+      </div>
+
+      <div class="case-file">
+        <div class="case-file-head">
+          <h3 data-i18n="exp2_title">Cyber Security Analyst (Remote), Condomínio Interativo</h3>
+          <span class="case-status period" data-i18n="exp2_dates">Jan 2025 – Jan 2026</span>
+        </div>
+        <ul class="case-bullets">
+          <li data-i18n="exp2_b1">Implemented MFA and advanced access control policies; conducted vulnerability assessments and penetration testing using Burp Suite, Nmap, and Metasploit.</li>
+          <li data-i18n="exp2_b2">Monitored logs and network traffic in real time and executed incident response protocols to contain and remediate threats.</li>
+          <li data-i18n="exp2_b3">Conducted SIEM incident investigation and root cause analysis in support of the SOC.</li>
+          <li data-i18n="exp2_b4">Documented risk assessments and access governance aligned with LGPD and ISO 27001.</li>
+        </ul>
+        <div class="achievement">
+          <span class="lbl" data-i18n="achievement_label">Key achievement</span>
+          <span data-i18n="exp2_achievement">Rolled out MFA and granular access controls across the platform, and introduced continuous monitoring and alerting that gave the team earlier visibility into security events.</span>
+        </div>
+      </div>
+
+      <div class="case-file">
+        <div class="case-file-head">
+          <h3 data-i18n="exp3_title">Security Analyst (Remote), Techmetria</h3>
+          <span class="case-status period" data-i18n="exp3_dates">Aug 2022 – Dec 2024</span>
+        </div>
+        <ul class="case-bullets">
+          <li data-i18n="exp3_b1">Delivered remote cybersecurity oversight and network protection for enterprise-level smart metering infrastructure.</li>
+          <li data-i18n="exp3_b2">Enforced MFA and RBAC; monitored network traffic and ran system audits with Wireshark, Nmap, and Splunk.</li>
+          <li data-i18n="exp3_b3">Collaborated with development teams to remediate vulnerabilities in legacy and new application releases.</li>
+        </ul>
+        <div class="achievement">
+          <span class="lbl" data-i18n="achievement_label">Key achievement</span>
+          <span data-i18n="exp3_achievement">Built and deployed automated threat-detection workflows in Splunk, tuning alerts to cut noise from false positives and tightening access governance around authentication.</span>
+        </div>
+      </div>
+
+      <div class="case-file">
+        <div class="case-file-head">
+          <h3 data-i18n="exp4_title">IT Support Specialist, Techmetria</h3>
+          <span class="case-status period" data-i18n="exp4_dates">Feb 2014 – Jun 2017</span>
+        </div>
+        <ul class="case-bullets">
+          <li data-i18n="exp4_b1">Delivered end-to-end technical support for networked and smart metering systems for approximately 30 users.</li>
+          <li data-i18n="exp4_b2">Managed 50–70 user accounts, enforcing Role-Based Access Control and MFA via Active Directory.</li>
+          <li data-i18n="exp4_b3">Standardised troubleshooting procedures and introduced preventive maintenance checklists.</li>
+        </ul>
+        <div class="achievement">
+          <span class="lbl" data-i18n="achievement_label">Key achievement</span>
+          <span data-i18n="exp4_achievement">Set up Splunk dashboards and automated alerts for proactive monitoring, and standardised troubleshooting procedures that noticeably cut recurring incidents.</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education" class="reveal">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <h2 data-i18n="education_title">Education</h2>
+      <span class="section-rule"></span>
+    </div>
+    <div class="case-files">
+
+      <div class="case-file">
+        <div class="case-file-head">
+          <h3 data-i18n="edu1_title">Higher Diploma, Cybersecurity Risk &amp; Compliance</h3>
+          <span class="case-status period" data-i18n="edu1_dates">Jan 2025 – Feb 2026</span>
+        </div>
+        <span class="case-sub" data-i18n="edu1_school">Atlantic Technological University, Galway, Ireland</span>
+        <p class="desc" data-i18n="edu1_modules">
+          Modules: Cyber Security Architecture, Data Protection Law &amp; Compliance, Secure Information
+          and Event Management, Cyber Security Governance, Risk and Compliance.
+        </p>
+        <div class="achievement">
+          <span class="lbl" data-i18n="academic_project_label">Academic project</span>
+          <span data-i18n="edu1_project">Final project: Integrating AI for Automated Threat Detection &amp; Response (TDR) and Compliance. A virtual SOC built on Azure Lab Services with a Windows 10 endpoint and Splunk Enterprise SIEM. Simulated attacks mapped to MITRE ATT&amp;CK (T1110, T1547, T1055) to benchmark rule-based detection against AI-assisted workflows using the Splunk ML Toolkit, measuring MTTD, MTTR, and false positives, with compliance tracking aligned to GDPR and the EU AI Act.</span>
+        </div>
+      </div>
+
+      <div class="case-file">
+        <div class="case-file-head">
+          <h3 data-i18n="edu2_title">Bachelor's Degree in Computing &amp; IT</h3>
+          <span class="case-status period" data-i18n="edu2_dates">Aug 2019 – Aug 2022</span>
+        </div>
+        <span class="case-sub" data-i18n="edu2_school">CCT College Dublin, Ireland</span>
+        <p class="desc" data-i18n="edu2_modules">
+          Modules: Cloud Computing Fundamentals &amp; Platforms, Security Protocols &amp; Infrastructure
+          Deployment, Network Forensics, Advanced Databases, Data Structures &amp; Algorithms.
+        </p>
+        <div class="achievement">
+          <span class="lbl" data-i18n="academic_project_label">Academic project</span>
+          <span data-i18n="edu2_project">DigiTreasure (NFT Marketplace on Blockchain): integration of cryptography and smart contracts for secure digital transactions, built on Polygon with MetaMask authentication, AWS S3, and IPFS.</span>
+        </div>
+        <a class="case-link" href="https://digitreasuredemo-d7yz15ej3-christoffersenry.vercel.app/" target="_blank" rel="noopener"><span data-i18n="link_view_demo">View demo</span> →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section id="certifications" class="reveal">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <h2 data-i18n="certs_title">Certifications</h2>
+      <span class="section-rule"></span>
+    </div>
+    <div class="cert-grid">
+      <div class="cert-card">
+        <span class="verified" data-i18n="cert_verified">✓ verified</span>
+        <div class="badge">S+</div>
+        <h3 data-i18n="cert_secplus_title">CompTIA Security+ (2026)</h3>
+        <p data-i18n="cert_secplus_desc">Foundational information security certification: networking, threats, cryptography, and risk management.</p>
+        <p style="margin-top:8px;"><a href="https://www.credly.com/badges/2d792bcd-bdb7-42f0-a076-84996e2088e9" target="_blank" rel="noopener" style="color:var(--teal); font-family:var(--font-mono); font-size:12px;"><span data-i18n="cert_verify_badge">Verify badge</span> →</a></p>
+      </div>
+      <div class="cert-card">
+        <span class="verified" data-i18n="cert_verified">✓ verified</span>
+        <div class="badge">G</div>
+        <h3 data-i18n="cert_google_title">Google Career Certificates</h3>
+        <ul>
+          <li data-i18n="cert_google_1">Cybersecurity Professional Certificate (2024)</li>
+          <li><span data-i18n="cert_google_2">Foundations of Cybersecurity (2024)</span> <a href="https://www.coursera.org/account/accomplishments/verify/13NL2R407E8N" target="_blank" rel="noopener" class="cert-verify-link" data-i18n="verify_short">verify</a></li>
+          <li><span data-i18n="cert_google_3">Play It Safe: Manage Security Risks (2025)</span> <a href="https://www.coursera.org/account/accomplishments/verify/6UE917NJ43KS" target="_blank" rel="noopener" class="cert-verify-link" data-i18n="verify_short">verify</a></li>
+          <li><span data-i18n="cert_google_4">Google AI Essentials (2025)</span> <a href="https://www.coursera.org/account/accomplishments/verify/PZIFPRZS7SLC" target="_blank" rel="noopener" class="cert-verify-link" data-i18n="verify_short">verify</a></li>
+        </ul>
+      </div>
+      <div class="cert-card">
+        <span class="verified" data-i18n="cert_active">✓ active</span>
+        <div class="badge">THM</div>
+        <h3>TryHackMe</h3>
+        <p><span data-i18n="cert_thm_desc">Continuous practice in offensive and defensive labs. Profile:</span> <a href="https://tryhackme.com/p/FloppyMemo" target="_blank" rel="noopener" style="color:var(--teal)">tryhackme.com/p/FloppyMemo</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="reveal">
+    <div class="section-head">
+      <span class="section-num">05</span>
+      <h2 data-i18n="skills_title">Skills</h2>
+      <span class="section-rule"></span>
+    </div>
+    <div class="skill-cats">
+      <div>
+        <div class="skill-cat-label" data-i18n="skill_cat_security_tools">Security &amp; Monitoring Tools</div>
+        <div class="chips">
+          <span class="chip">Wireshark</span>
+          <span class="chip">Nmap</span>
+          <span class="chip">Splunk</span>
+          <span class="chip">Splunk ML Toolkit</span>
+          <span class="chip">MITRE ATT&amp;CK</span>
+          <span class="chip">Burp Suite</span>
+          <span class="chip">Metasploit</span>
+          <span class="chip">THC Hydra</span>
+          <span class="chip">SIEM</span>
+        </div>
+      </div>
+      <div>
+        <div class="skill-cat-label" data-i18n="skill_cat_iam">IAM &amp; Access Control</div>
+        <div class="chips">
+          <span class="chip">Active Directory</span>
+          <span class="chip">Group Policy</span>
+          <span class="chip">Azure AD</span>
+          <span class="chip">MFA</span>
+          <span class="chip">RBAC</span>
+          <span class="chip">Office 365 Admin Centre</span>
+        </div>
+      </div>
+      <div>
+        <div class="skill-cat-label" data-i18n="skill_cat_networking">Networking &amp; Infrastructure</div>
+        <div class="chips">
+          <span class="chip">LAN/WAN</span>
+          <span class="chip">TCP/IP</span>
+          <span class="chip">DNS</span>
+          <span class="chip">DHCP</span>
+          <span class="chip">VPN</span>
+          <span class="chip">Firewalls</span>
+          <span class="chip" data-i18n="chip_endpoint">Endpoint Security</span>
+          <span class="chip" data-i18n="chip_patch">Patch Management</span>
+        </div>
+      </div>
+      <div>
+        <div class="skill-cat-label" data-i18n="skill_cat_cloud">Cloud &amp; Virtualisation</div>
+        <div class="chips">
+          <span class="chip">AWS</span>
+          <span class="chip">Microsoft Azure</span>
+          <span class="chip">VMware</span>
+          <span class="chip">VirtualBox</span>
+        </div>
+      </div>
+      <div>
+        <div class="skill-cat-label" data-i18n="skill_cat_programming">Programming &amp; Databases</div>
+        <div class="chips">
+          <span class="chip">Python</span>
+          <span class="chip">JavaScript</span>
+          <span class="chip">PHP</span>
+          <span class="chip">SQL</span>
+          <span class="chip">MySQL</span>
+          <span class="chip">Oracle</span>
+        </div>
+      </div>
+      <div>
+        <div class="skill-cat-label" data-i18n="skill_cat_compliance">Compliance &amp; Frameworks</div>
+        <div class="chips">
+          <span class="chip">GDPR</span>
+          <span class="chip">LGPD</span>
+          <span class="chip">ISO 27001</span>
+          <span class="chip">PCI-DSS</span>
+          <span class="chip">NIS2</span>
+          <span class="chip">DORA</span>
+          <span class="chip">HIPAA</span>
+          <span class="chip" data-i18n="chip_grc">GRC</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LABS / WRITEUPS -->
+  <section id="labs" class="reveal">
+    <div class="section-head">
+      <span class="section-num">06</span>
+      <h2 data-i18n="labs_title">Hands-On Labs &amp; Writeups</h2>
+      <span class="section-rule"></span>
+    </div>
+    <p style="color:var(--ink-dim); font-size:14.5px; margin-top:-20px; margin-bottom:28px;" data-i18n="labs_intro">
+      Continued hands-on practice alongside professional work, keeping offensive and defensive skills sharp.
+    </p>
+    <div class="case-files">
+
+      <div class="case-file">
+        <div class="case-file-head">
+          <h3><span data-i18n="case_label">Case</span> 001: Alert Triage With Splunk</h3>
+          <span class="case-status resolved" data-i18n="status_resolved">Resolved</span>
+        </div>
+        <p class="desc" data-i18n="case1_desc">
+          Used Splunk to triage security alerts and investigate malicious activity, prioritizing
+          events and documenting the analysis, direct practice of monitoring in a SOC environment.
+        </p>
+        <div class="case-meta">
+          <div><span class="k" data-i18n="meta_platform">Platform</span><span class="v">TryHackMe</span></div>
+          <div><span class="k" data-i18n="meta_technique">Technique</span><span class="v">SIEM / Alert Triage</span></div>
+          <div><span class="k" data-i18n="meta_difficulty">Difficulty</span><span class="v" data-i18n="difficulty_medium">Medium</span></div>
+        </div>
+      </div>
+
+      <div class="case-file">
+        <div class="case-file-head">
+          <h3><span data-i18n="case_label">Case</span> 002: Incident Response Process</h3>
+          <span class="case-status resolved" data-i18n="status_resolved">Resolved</span>
+        </div>
+        <p class="desc" data-i18n="case2_desc">
+          Applied the NIST Incident Response lifecycle on a compromised Windows workstation:
+          identification, containment, eradication, recovery, and lessons learned.
+        </p>
+        <div class="case-meta">
+          <div><span class="k" data-i18n="meta_platform">Platform</span><span class="v">TryHackMe</span></div>
+          <div><span class="k" data-i18n="meta_technique">Technique</span><span class="v">NIST IR Lifecycle</span></div>
+          <div><span class="k" data-i18n="meta_difficulty">Difficulty</span><span class="v" data-i18n="difficulty_medium">Medium</span></div>
+        </div>
+      </div>
+
+      <div class="case-file">
+        <div class="case-file-head">
+          <h3><span data-i18n="case_label">Case</span> 003: Vulnerability Management</h3>
+          <span class="case-status resolved" data-i18n="status_resolved">Resolved</span>
+        </div>
+        <p class="desc" data-i18n="case3_desc">
+          Practiced the full vulnerability management cycle: identification, assessment,
+          prioritization, remediation, and reporting, aligned with the process used in regulated
+          operational environments.
+        </p>
+        <div class="case-meta">
+          <div><span class="k" data-i18n="meta_platform">Platform</span><span class="v">TryHackMe</span></div>
+          <div><span class="k" data-i18n="meta_technique">Technique</span><span class="v">Vulnerability Management</span></div>
+          <div><span class="k" data-i18n="meta_difficulty">Difficulty</span><span class="v" data-i18n="difficulty_medium">Medium</span></div>
+        </div>
+      </div>
+
+      <div class="case-file">
+        <div class="case-file-head">
+          <h3><span data-i18n="case_label">Case</span> 004: Moniker Link (CVE-2024-21413)</h3>
+          <span class="case-status resolved" data-i18n="status_resolved">Resolved</span>
+        </div>
+        <p class="desc" data-i18n="case4_desc">
+          Exploited CVE-2024-21413 to bypass Outlook's Protected View and leak credentials.
+          Hands-on analysis of a real, documented CVE, focused on impact and mitigation.
+        </p>
+        <div class="case-meta">
+          <div><span class="k" data-i18n="meta_platform">Platform</span><span class="v">TryHackMe</span></div>
+          <div><span class="k" data-i18n="meta_technique">Technique</span><span class="v">CVE Exploitation</span></div>
+          <div><span class="k" data-i18n="meta_difficulty">Difficulty</span><span class="v" data-i18n="difficulty_easy">Easy</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <footer id="contact" class="reveal">
+    <div class="footer-grid">
+      <div>
+        <h2 data-i18n="contact_title">Let's talk?</h2>
+        <p data-i18n="contact_desc">Open to Cybersecurity and Security Operations opportunities. Let's connect.</p>
+      </div>
+      <div class="contact-links">
+        <a class="btn btn-ghost" href="mailto:floppy.memo11@gmail.com" data-i18n="link_email">Email</a>
+        <a class="btn btn-ghost" href="https://github.com/FloppyMemo" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/caio-h-rocha/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn btn-ghost" href="https://tryhackme.com/p/FloppyMemo" target="_blank" rel="noopener">TryHackMe</a>
+      </div>
+    </div>
+    <div class="eof"><span data-i18n="eof_text">// end of log, CR-01</span></div>
+  </footer>
+
+</div>
+
+<script>
+  const translations = {
+    dossier_label: { en: "SEC-OPS", pt: "SEC-OPS" },
+    nav_about: { en: "About", pt: "Sobre" },
+    nav_experience: { en: "Experience", pt: "Experiência" },
+    nav_education: { en: "Education", pt: "Educação" },
+    nav_certs: { en: "Certifications", pt: "Certificações" },
+    nav_skills: { en: "Skills", pt: "Skills" },
+    nav_labs: { en: "Labs", pt: "Labs" },
+    nav_contact: { en: "Contact", pt: "Contato" },
+    stamp: { en: "TLP:CLEAR", pt: "TLP:CLEAR" },
+    role: { en: "cybersecurity / security operations &amp; compliance", pt: "cybersecurity / security operations &amp; compliance" },
+    lede: {
+      en: "Security-focused technology professional with a foundation in IT support, now working across risk-based investigations, SIEM monitoring, and access control (MFA, RBAC). This site brings together my professional experience, education, and continued hands-on practice.",
+      pt: "Profissional de tecnologia focado em segurança, com base sólida em suporte de TI, atuando hoje em investigações baseadas em risco, monitoramento via SIEM e controle de acesso (MFA, RBAC). Este site reúne minha experiência profissional, formação acadêmica e prática contínua."
+    },
+    btn_view_experience: { en: "View experience", pt: "Ver experiência" },
+    btn_contact: { en: "Contact", pt: "Contato" },
+    about_title: { en: "About", pt: "Sobre" },
+    about_p1: {
+      en: "I'm a results-driven cybersecurity professional fluent in Portuguese and English, with hands-on security and IT experience across Brazil and Ireland. I hold a Bachelor's Degree in Computing &amp; IT from CCT College Dublin and a Higher Diploma in Cybersecurity, Risk &amp; Compliance from Atlantic Technological University.",
+      pt: "Sou um profissional de cybersecurity orientado a resultados, fluente em português e inglês, com experiência prática em segurança e TI no Brasil e na Irlanda. Tenho Bacharelado em Computing &amp; IT pelo CCT College Dublin e Higher Diploma em Cybersecurity, Risk &amp; Compliance pela Atlantic Technological University."
+    },
+    about_p2: {
+      en: "My path runs from IT support into security operations: implementing controls like MFA and RBAC, running vulnerability assessments, and investigating incidents through SIEM. I'm currently a Trust &amp; Safety Analyst at Accenture, performing risk-based investigations, and I keep offensive and defensive skills sharp through hands-on labs.",
+      pt: "Minha trajetória vai do suporte de TI às operações de segurança: implementando controles como MFA e RBAC, realizando avaliações de vulnerabilidade e investigando incidentes via SIEM. Atualmente sou Trust &amp; Safety Analyst na Accenture, realizando investigações baseadas em risco, e mantenho as habilidades ofensivas e defensivas afiadas em labs práticos."
+    },
+    field_area: { en: "Area", pt: "Área" },
+    field_area_val: { en: "Cybersecurity", pt: "Cybersecurity" },
+    field_focus: { en: "Focus", pt: "Foco" },
+    field_focus_val: { en: "Security Operations &amp; Compliance", pt: "Operações de Segurança &amp; Compliance" },
+    field_languages: { en: "Languages", pt: "Idiomas" },
+    field_base: { en: "Experience", pt: "Experiência" },
+    field_base_val: { en: "5+ years IT/Sec", pt: "5+ anos TI/Seg" },
+    field_location: { en: "Location", pt: "Local" },
+    field_location_val: { en: "Ireland", pt: "Irlanda" },
+    field_status: { en: "Status", pt: "Status" },
+    field_status_val: { en: "Open to opportunities", pt: "Aberto a oportunidades" },
+    experience_title: { en: "Experience", pt: "Experiência" },
+    exp1_title: { en: "Trust &amp; Safety Analyst, Accenture", pt: "Trust &amp; Safety Analyst, Accenture" },
+    exp1_dates: { en: "Feb 2026 – Present", pt: "Fev 2026 – Atual" },
+    exp1_b1: { en: "Perform risk-based investigations and policy enforcement for a global technology client, ensuring compliance with client policies, operational procedures, and applicable security requirements.", pt: "Realizo investigações baseadas em risco e aplicação de políticas para um cliente global de tecnologia, garantindo conformidade com políticas do cliente, procedimentos operacionais e requisitos de segurança aplicáveis." },
+    exp1_b2: { en: "Analyse complex cases, assess policy, integrity, and platform risks, and make accurate policy-driven decisions in a fast-paced, high-volume environment.", pt: "Analiso casos complexos, avalio riscos de política, integridade e plataforma, e tomo decisões precisas baseadas em políticas em um ambiente de alto volume e ritmo acelerado." },
+    exp1_b3: { en: "Identify and escalate sensitive or high-risk cases to appropriate stakeholders while maintaining confidentiality and adherence to governance and escalation procedures.", pt: "Identifico e escalo casos sensíveis ou de alto risco para os stakeholders adequados, mantendo confidencialidade e aderência a procedimentos de governança e escalação." },
+    exp1_b4: { en: "Collaborate with Quality Assurance, Training, Subject Matter Experts (SMEs), and cross-functional teams through policy calibrations, quality reviews, and continuous improvement initiatives.", pt: "Colaboro com Quality Assurance, Treinamento, Subject Matter Experts (SMEs) e equipes multifuncionais por meio de calibrações de política, revisões de qualidade e iniciativas de melhoria contínua." },
+    exp1_b5: { en: "Operate within strict data protection, confidentiality, and information security requirements while consistently maintaining high standards of quality and operational accuracy.", pt: "Atuo sob requisitos rigorosos de proteção de dados, confidencialidade e segurança da informação, mantendo consistentemente altos padrões de qualidade e precisão operacional." },
+    exp2_title: { en: "Cyber Security Analyst (Remote), Condomínio Interativo", pt: "Cyber Security Analyst (Remoto), Condomínio Interativo" },
+    exp2_dates: { en: "Jan 2025 – Jan 2026", pt: "Jan 2025 – Jan 2026" },
+    exp2_b1: { en: "Implemented MFA and advanced access control policies; conducted vulnerability assessments and penetration testing using Burp Suite, Nmap, and Metasploit.", pt: "Implementei MFA e políticas avançadas de controle de acesso; realizei avaliações de vulnerabilidade e testes de penetração com Burp Suite, Nmap e Metasploit." },
+    exp2_b2: { en: "Monitored logs and network traffic in real time and executed incident response protocols to contain and remediate threats.", pt: "Monitorei logs e tráfego de rede em tempo real e executei protocolos de resposta a incidentes para conter e remediar ameaças." },
+    exp2_b3: { en: "Conducted SIEM incident investigation and root cause analysis in support of the SOC.", pt: "Realizei investigação de incidentes via SIEM e análise de causa raiz em apoio ao SOC." },
+    exp2_b4: { en: "Documented risk assessments and access governance aligned with LGPD and ISO 27001.", pt: "Documentei avaliações de risco e governança de acesso alinhadas à LGPD e à ISO 27001." },
+    exp2_achievement: { en: "Rolled out MFA and granular access controls across the platform, and introduced continuous monitoring and alerting that gave the team earlier visibility into security events.", pt: "Implantei MFA e controles de acesso granulares em toda a plataforma, e introduzi monitoramento contínuo com alertas que deram à equipe visibilidade antecipada de eventos de segurança." },
+    exp3_title: { en: "Security Analyst (Remote), Techmetria", pt: "Security Analyst (Remoto), Techmetria" },
+    exp3_dates: { en: "Aug 2022 – Dec 2024", pt: "Ago 2022 – Dez 2024" },
+    exp3_b1: { en: "Delivered remote cybersecurity oversight and network protection for enterprise-level smart metering infrastructure.", pt: "Prestei supervisão remota de cybersecurity e proteção de rede para infraestrutura corporativa de telemetria." },
+    exp3_b2: { en: "Enforced MFA and RBAC; monitored network traffic and ran system audits with Wireshark, Nmap, and Splunk.", pt: "Aplicei MFA e RBAC; monitorei tráfego de rede e realizei auditorias de sistema com Wireshark, Nmap e Splunk." },
+    exp3_b3: { en: "Collaborated with development teams to remediate vulnerabilities in legacy and new application releases.", pt: "Colaborei com equipes de desenvolvimento para remediar vulnerabilidades em sistemas legados e novas versões de aplicações." },
+    exp3_achievement: { en: "Built and deployed automated threat-detection workflows in Splunk, tuning alerts to cut noise from false positives and tightening access governance around authentication.", pt: "Construí e implantei workflows automatizados de detecção de ameaças no Splunk, ajustando alertas para reduzir ruído de falsos positivos e reforçando a governança de acesso na autenticação." },
+    exp4_title: { en: "IT Support Specialist, Techmetria", pt: "IT Support Specialist, Techmetria" },
+    exp4_dates: { en: "Feb 2014 – Jun 2017", pt: "Fev 2014 – Jun 2017" },
+    exp4_b1: { en: "Delivered end-to-end technical support for networked and smart metering systems for approximately 30 users.", pt: "Prestei suporte técnico completo para sistemas de rede e telemetria para aproximadamente 30 usuários." },
+    exp4_b2: { en: "Managed 50–70 user accounts, enforcing Role-Based Access Control and MFA via Active Directory.", pt: "Gerenciei de 50 a 70 contas de usuário, aplicando RBAC e MFA via Active Directory." },
+    exp4_b3: { en: "Standardised troubleshooting procedures and introduced preventive maintenance checklists.", pt: "Padronizei procedimentos de troubleshooting e introduzi checklists de manutenção preventiva." },
+    exp4_achievement: { en: "Set up Splunk dashboards and automated alerts for proactive monitoring, and standardised troubleshooting procedures that noticeably cut recurring incidents.", pt: "Configurei dashboards no Splunk e alertas automatizados para monitoramento proativo, e padronizei procedimentos de troubleshooting que reduziram visivelmente incidentes recorrentes." },
+    achievement_label: { en: "Key achievement", pt: "Principal resultado" },
+    education_title: { en: "Education", pt: "Educação" },
+    edu1_title: { en: "Higher Diploma, Cybersecurity Risk &amp; Compliance", pt: "Higher Diploma, Cybersecurity Risk &amp; Compliance" },
+    edu1_dates: { en: "Jan 2025 – Feb 2026", pt: "Jan 2025 – Fev 2026" },
+    edu1_school: { en: "Atlantic Technological University, Galway, Ireland", pt: "Atlantic Technological University, Galway, Irlanda" },
+    edu1_modules: {
+      en: "Modules: Cyber Security Architecture, Data Protection Law &amp; Compliance, Secure Information and Event Management, Cyber Security Governance, Risk and Compliance.",
+      pt: "Módulos: Cyber Security Architecture, Data Protection Law &amp; Compliance, Secure Information and Event Management, Cyber Security Governance, Risk and Compliance."
+    },
+    academic_project_label: { en: "Academic project", pt: "Projeto acadêmico" },
+    edu1_project: {
+      en: "Final project: Integrating AI for Automated Threat Detection &amp; Response (TDR) and Compliance. A virtual SOC built on Azure Lab Services with a Windows 10 endpoint and Splunk Enterprise SIEM. Simulated attacks mapped to MITRE ATT&amp;CK (T1110, T1547, T1055) to benchmark rule-based detection against AI-assisted workflows using the Splunk ML Toolkit, measuring MTTD, MTTR, and false positives, with compliance tracking aligned to GDPR and the EU AI Act.",
+      pt: "Projeto final: Integrating AI for Automated Threat Detection &amp; Response (TDR) and Compliance. Um SOC virtual construído no Azure Lab Services com endpoint Windows 10 e SIEM Splunk Enterprise. Ataques simulados mapeados ao MITRE ATT&amp;CK (T1110, T1547, T1055) para comparar detecção baseada em regras com workflows assistidos por IA usando o Splunk ML Toolkit, medindo MTTD, MTTR e falsos positivos, com rastreamento de compliance alinhado ao GDPR e ao EU AI Act."
+    },
+    edu2_title: { en: "Bachelor's Degree in Computing &amp; IT", pt: "Bacharelado em Computing &amp; IT" },
+    edu2_dates: { en: "Aug 2019 – Aug 2022", pt: "Ago 2019 – Ago 2022" },
+    edu2_school: { en: "CCT College Dublin, Ireland", pt: "CCT College Dublin, Irlanda" },
+    edu2_modules: {
+      en: "Modules: Cloud Computing Fundamentals &amp; Platforms, Security Protocols &amp; Infrastructure Deployment, Network Forensics, Advanced Databases, Data Structures &amp; Algorithms.",
+      pt: "Módulos: Cloud Computing Fundamentals &amp; Platforms, Security Protocols &amp; Infrastructure Deployment, Network Forensics, Advanced Databases, Data Structures &amp; Algorithms."
+    },
+    edu2_project: {
+      en: "DigiTreasure (NFT Marketplace on Blockchain): integration of cryptography and smart contracts for secure digital transactions, built on Polygon with MetaMask authentication, AWS S3, and IPFS.",
+      pt: "DigiTreasure (Marketplace de NFTs na Blockchain): integração de criptografia e smart contracts para transações digitais seguras, construído na Polygon com autenticação via MetaMask, AWS S3 e IPFS."
+    },
+    certs_title: { en: "Certifications", pt: "Certificações" },
+    cert_verified: { en: "✓ verified", pt: "✓ verificado" },
+    cert_active: { en: "✓ active", pt: "✓ ativo" },
+    cert_secplus_title: { en: "CompTIA Security+ (2026)", pt: "CompTIA Security+ (2026)" },
+    cert_secplus_desc: {
+      en: "Foundational information security certification: networking, threats, cryptography, and risk management.",
+      pt: "Certificação fundamental em segurança da informação: redes, ameaças, criptografia e gestão de riscos."
+    },
+    cert_verify_badge: { en: "Verify badge", pt: "Verificar badge" },
+    verify_short: { en: "verify", pt: "verificar" },
+    cert_google_title: { en: "Google Career Certificates", pt: "Certificados Google" },
+    cert_google_1: { en: "Cybersecurity Professional Certificate (2024)", pt: "Cybersecurity Professional Certificate (2024)" },
+    cert_google_2: { en: "Foundations of Cybersecurity (2024)", pt: "Foundations of Cybersecurity (2024)" },
+    cert_google_3: { en: "Play It Safe: Manage Security Risks (2025)", pt: "Play It Safe: Manage Security Risks (2025)" },
+    cert_google_4: { en: "Google AI Essentials (2025)", pt: "Google AI Essentials (2025)" },
+    cert_thm_desc: { en: "Continuous practice in offensive and defensive labs. Profile:", pt: "Prática contínua em labs ofensivos e defensivos. Perfil:" },
+    skills_title: { en: "Skills", pt: "Skills" },
+    skill_cat_security_tools: { en: "Security &amp; Monitoring Tools", pt: "Ferramentas de Segurança &amp; Monitoramento" },
+    skill_cat_iam: { en: "IAM &amp; Access Control", pt: "IAM &amp; Controle de Acesso" },
+    skill_cat_networking: { en: "Networking &amp; Infrastructure", pt: "Redes &amp; Infraestrutura" },
+    skill_cat_cloud: { en: "Cloud &amp; Virtualisation", pt: "Cloud &amp; Virtualização" },
+    skill_cat_programming: { en: "Programming &amp; Databases", pt: "Programação &amp; Bancos de Dados" },
+    skill_cat_compliance: { en: "Compliance &amp; Frameworks", pt: "Compliance &amp; Frameworks" },
+    chip_grc: { en: "GRC", pt: "GRC" },
+    chip_endpoint: { en: "Endpoint Security", pt: "Segurança de Endpoint" },
+    chip_patch: { en: "Patch Management", pt: "Gestão de Patches" },
+    labs_title: { en: "Hands-On Labs &amp; Writeups", pt: "Labs Práticos &amp; Writeups" },
+    labs_intro: {
+      en: "Continued hands-on practice alongside professional work, keeping offensive and defensive skills sharp.",
+      pt: "Prática contínua em paralelo ao trabalho profissional, mantendo as habilidades ofensivas e defensivas afiadas."
+    },
+    case_label: { en: "Case", pt: "Caso" },
+    status_resolved: { en: "Resolved", pt: "Resolvido" },
+    meta_platform: { en: "Platform", pt: "Plataforma" },
+    meta_technique: { en: "Technique", pt: "Técnica" },
+    meta_difficulty: { en: "Difficulty", pt: "Dificuldade" },
+    difficulty_easy: { en: "Easy", pt: "Fácil" },
+    difficulty_medium: { en: "Medium", pt: "Média" },
+    link_view_demo: { en: "View demo", pt: "Ver demo" },
+    link_email: { en: "Email", pt: "E-mail" },
+    case1_desc: {
+      en: "Used Splunk to triage security alerts and investigate malicious activity, prioritizing events and documenting the analysis, direct practice of monitoring in a SOC environment.",
+      pt: "Uso do Splunk para triagem de alertas de segurança e investigação de atividade maliciosa, priorizando eventos e documentando a análise, prática direta de monitoramento em ambiente de SOC."
+    },
+    case2_desc: {
+      en: "Applied the NIST Incident Response lifecycle on a compromised Windows workstation: identification, containment, eradication, recovery, and lessons learned.",
+      pt: "Aplicação do ciclo de vida de Incident Response do NIST em uma workstation Windows comprometida: identificação, contenção, erradicação, recuperação e lições aprendidas."
+    },
+    case3_desc: {
+      en: "Practiced the full vulnerability management cycle: identification, assessment, prioritization, remediation, and reporting, aligned with the process used in regulated operational environments.",
+      pt: "Prática do ciclo completo de gestão de vulnerabilidades: identificação, avaliação, priorização, remediação e reporte, alinhado ao processo usado em ambientes operacionais regulados."
+    },
+    case4_desc: {
+      en: "Exploited CVE-2024-21413 to bypass Outlook's Protected View and leak credentials. Hands-on analysis of a real, documented CVE, focused on impact and mitigation.",
+      pt: "Exploração da CVE-2024-21413 para contornar o Protected View do Outlook e vazar credenciais. Análise prática de uma vulnerabilidade real (CVE) documentada, com foco em impacto e mitigação."
+    },
+    contact_title: { en: "Let's talk?", pt: "Vamos conversar?" },
+    contact_desc: { en: "Open to Cybersecurity and Security Operations opportunities. Let's connect.", pt: "Aberto a oportunidades em Cybersecurity e Operações de Segurança. Vamos conversar." },
+    eof_text: { en: "// end of log, CR-01", pt: "// fim do log, CR-01" }
+  };
+
+  function setLanguage(lang) {
+    document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      const entry = translations[key];
+      if (entry && entry[lang]) {
+        el.innerHTML = entry[lang];
+      }
+    });
+    document.querySelectorAll('.lang-toggle button').forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+    });
+    try { localStorage.setItem('site-lang', lang); } catch (e) {}
+  }
+
+  document.querySelectorAll('.lang-toggle button').forEach(btn => {
+    btn.addEventListener('click', () => setLanguage(btn.getAttribute('data-lang')));
+  });
+
+  let initialLang = 'en';
+  try {
+    const saved = localStorage.getItem('site-lang');
+    if (saved === 'pt' || saved === 'en') initialLang = saved;
+  } catch (e) {}
+  setLanguage(initialLang);
+
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
