@@ -49,3 +49,4 @@ Open `index.html` directly in a browser. No server needed.
 ├── index.html   # complete site (HTML + CSS + JS in one file)
 └── README.md    # this guide
 ```
+
